@@ -1,3 +1,38 @@
+codex/crear-archivo-docker-compose.yml-con-3-servicios
+version: '3.9'
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - '5000:5000'
+    networks:
+      - internal
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - '3000:3000'
+    networks:
+      - internal
+  mongodb:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - internal
+
+volumes:
+  mongo-data:
+
+networks:
+  internal:
+    internal: true
+
 version: '3'
 services:
   backend:
@@ -12,3 +47,4 @@ services:
     container_name: frontend
     ports:
       - "5173:5173"
+ main
