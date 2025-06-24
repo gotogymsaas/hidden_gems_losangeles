@@ -6,7 +6,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "build-sw": "node build-sw.js",
-    "start": "npm run build && npm run build-sw && vite preview"
+    "start": "npm run build && npm run build-sw && vite preview",
+    "test": "jest"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -15,11 +16,10 @@
     "pixi.js": "^7.2.4"
   },
   "devDependencies": {
- s1ja1p-codex/escribir-funciones-fetch-en-levels.js
-    "@vitejs/plugin-react": "^4.0.0"
-
     "@vitejs/plugin-react": "^4.0.0",
-    "workbox-build": "^6.5.4"
- main
+    "workbox-build": "^6.5.4",
+    "jest": "^29.6.1",
+    "eslint": "^8.54.0",
+    "prettier": "^3.0.0"
   }
 }
