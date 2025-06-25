@@ -1,17 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AvatarSelector from './pages/AvatarSelector';
+import MapPage from './pages/MapPage';
+import GameBoard from './pages/GameBoard';
+import GemDetail from './pages/GemDetail';
+import ProfilePage from './pages/ProfilePage';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <div className="p-4 text-center">
-      <h1 className="text-2xl font-bold mb-4">Hidden Gems LA</h1>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setCount(count + 1)}>
-        count is {count}
-      </button>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/avatar" element={<AvatarSelector />} />
+        <Route path="/map" element={<MapPage />} />
+        <Route path="/play/:zone/:level" element={<GameBoard />} />
+        <Route path="/gem/:id" element={<GemDetail />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
