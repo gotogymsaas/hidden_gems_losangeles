@@ -49,7 +49,7 @@ export default function Header() {
           menuOpen ? 'block' : 'hidden'
         } md:flex md:items-center md:space-x-4`}
       >
-        <a href="/play" className="block px-3 py-2 hover:text-solarYellow">
+        <a href="/play/downtown/1" className="block px-3 py-2 hover:text-solarYellow">
           Jugar
         </a>
         <button

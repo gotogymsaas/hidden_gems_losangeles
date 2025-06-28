@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const levelRoutes = require('./routes/levels');
 require('dotenv').config();
 
 const { MONGO_URI, PORT = 5000 } = process.env;
@@ -9,6 +10,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/levels', levelRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
   mongoose
