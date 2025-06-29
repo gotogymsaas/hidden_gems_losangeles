@@ -12,9 +12,8 @@
     "mongoose": "^7.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "bcrypt": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
-    "express-validator": "^6.16.2"
+    "nodemailer": "^6.9.8"
   },
   "devDependencies": {
     "jest": "^29.6.1",
