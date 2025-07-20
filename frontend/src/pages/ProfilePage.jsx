@@ -1,82 +1,65 @@
-import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { InstagramAuthContext } from '../context/InstagramAuthContext';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip
-} from 'recharts';
+import { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
-  const navigate = useNavigate();
-  const { setToken } = useContext(InstagramAuthContext);
-  const [profile, setProfile] = useState(null);
+  const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(null);
+  const [requests, setRequests] = useState([]);
 
-  useEffect(() => {
-    fetch('/api/user/profile')
+  const fetchData = () => {
+    if (email) {
+      fetch(`/api/dsar?userEmail=${encodeURIComponent(email)}`)
+        .then((res) => res.json())
+        .then(setRequests)
+        .catch(() => setRequests([]));
+    }
+    fetch('/api/consent')
       .then((res) => res.json())
-      .then((data) => setProfile(data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  const logout = () => {
-    setToken(null);
-    navigate('/');
+      .then(setConsent)
+      .catch(() => setConsent(null));
   };
 
-  if (!profile) {
-    return <div className="p-4">Cargando...</div>;
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <div className="p-4 space-y-4 bg-white text-darkBg">
-      <img
-        src={`/api/avatars/${profile.avatar}`}
-        alt="Avatar"
-        className="w-32 h-32 rounded-full object-cover mx-auto"
-      />
+    <div className="p-4 space-y-4">
+      <div className="space-y-2">
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className="w-full border p-2 rounded"
+        />
+        <button
+          onClick={fetchData}
+          className="px-4 py-2 bg-solarYellow text-darkBg rounded font-header"
+        >
+          Cargar datos
+        </button>
+      </div>
 
       <div>
-        <h2 className="font-header font-semibold text-lg mb-2">Gemas encontradas</h2>
+        <h2 className="font-header font-semibold text-lg mb-2">Consentimiento</h2>
+        {consent ? (
+          <pre className="whitespace-pre-wrap">
+            {JSON.stringify(consent.categories, null, 2)}
+          </pre>
+        ) : (
+          'Sin datos'
+        )}
+      </div>
+
+      <div>
+        <h2 className="font-header font-semibold text-lg mb-2">Historial DSAR</h2>
         <ul className="list-disc list-inside space-y-1">
-          {profile.gemsFound.map((g) => (
-            <li key={g}>{g.toLowerCase()}</li>
+          {requests.map((r) => (
+            <li key={r._id}>
+              {r.type} - {r.status}
+            </li>
           ))}
         </ul>
       </div>
-
-      <div>
-        <h2 className="font-header font-semibold text-lg mb-2">Boosters</h2>
-        <div className="space-x-2">
-          {profile.boosters.map((b) => (
-            <span
-              key={b}
-              className="inline-block bg-neonPink text-white px-2 py-1 rounded-full text-sm"
-            >
-              {b}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <h2 className="font-header font-semibold text-lg mb-2">Progreso</h2>
-        <BarChart width={300} height={200} data={profile.playStats}>
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="levelsCompleted" fill="#F5DF4D" />
-        </BarChart>
-      </div>
-
-      <button
-        onClick={logout}
-        className="px-4 py-2 bg-neonPink text-white rounded font-header"
-      >
-        Cerrar sesión
-      </button>
     </div>
   );
 }
