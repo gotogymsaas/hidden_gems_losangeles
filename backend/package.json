@@ -14,7 +14,9 @@
     "dotenv": "^16.3.1",
     "bcrypt": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
-    "express-validator": "^6.16.2"
+    "express-validator": "^6.16.2",
+    "nodemailer": "^6.9.6",
+    "@sendgrid/mail": "^7.7.0"
   },
   "devDependencies": {
     "jest": "^29.6.1",
