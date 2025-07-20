@@ -25,7 +25,7 @@ router.post('/register',
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      user = new User({ email, password: hashedPassword });
+      user = new User({ email, passwordHash: hashedPassword });
       await user.save();
 
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
@@ -56,7 +56,7 @@ router.post('/login',
         return res.status(400).json({ message: 'Invalid credentials' });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.passwordHash);
       if (!isMatch) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
