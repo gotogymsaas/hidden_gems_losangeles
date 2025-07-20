@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ConsentBanner from '../components/ConsentBanner';
 
 const heroImages = [1, 2, 3];
 
@@ -10,6 +11,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-white text-darkBg font-body">
+      <ConsentBanner />
       <section className="w-full h-60 md:h-80 bg-skyBlue flex items-center justify-center">
         <h1 className="text-2xl md:text-4xl font-header font-bold text-white text-center px-4">
           Descubre LA’s best kept secrets
@@ -44,6 +46,12 @@ export default function HomePage() {
           <p>No te pierdas lo que está pasando.</p>
         </div>
       </section>
+
+      <div className="text-center pb-8">
+        <a href="/policies" className="underline text-skyBlue">
+          Ver Políticas
+        </a>
+      </div>
     </div>
   );
 }
