@@ -7,6 +7,7 @@ import GemDetail from './pages/GemDetail';
 import ProfilePage from './pages/ProfilePage';
 import PoliciesPage from './pages/PoliciesPage';
 import DSARFormPage from './pages/DSARFormPage';
+import AdminDashboard from './pages/AdminDashboard';
 import Layout from './components/Layout';
 import { InstagramAuthProvider } from './context/InstagramAuthContext';
 import './App.css';
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/map" element={<MapPage />} />
             <Route path="/play/:zone/:level" element={<GameBoard />} />
             <Route path="/gem/:id" element={<GemDetail />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </Layout>
       </BrowserRouter>
