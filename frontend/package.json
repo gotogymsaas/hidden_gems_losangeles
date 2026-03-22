@@ -13,6 +13,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+codex/crear-estructura-de-carpetas-y-package.json-para-proyecto-fu
+
     "pixi.js": "^7.2.4",
     "react-router-dom": "^6.23.0",
     "recharts": "^2.8.0",
@@ -22,10 +24,15 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
+main
     "vite": "^4.4.0",
     "tailwindcss": "^3.4.0",
     "postcss": "^8.4.0",
     "autoprefixer": "^10.4.0",
+    "i18next": "^23.5.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
     "workbox-build": "^6.5.4",
     "jest": "^29.6.1",
     "eslint": "^8.54.0",
